@@ -29,12 +29,12 @@ import com.example.demo.Model.Book;
 import com.example.demo.Repositories.BookRepo;
 import com.example.demo.Services.BookService;
 
+import junit.framework.Assert;
+
 @ExtendWith(MockitoExtension.class)
 
 public class BookServiceTest {
 	
-	@Autowired
-    private MockMvc mockMvc;
 	
 	@Mock private BookRepo repo;
 	private BookService bookServiceUnderTest;
@@ -48,17 +48,16 @@ public class BookServiceTest {
 
 	
 	@Test
-	@Disabled
-	public void getAllBooks() {
-		//When
+	public void getAllBooksTest() {
+		//When 
 		bookServiceUnderTest.getAllBooks();
 		//Then
 		verify(repo).findAll();
 	}
 	
 	
+	
 	@Test
-	@Disabled
 	public void saveBookTest() {
 		//Give
 		Book book = Book.builder().id(0).name("Java").build();
@@ -75,8 +74,8 @@ public class BookServiceTest {
 	
 	
 	
+	
 	 @Test
-	 @Disabled
 	 public void deleteBookById() {
 		long id = 2L;
 		Book book = Book.builder().id(id).name("Java").build();
@@ -84,10 +83,11 @@ public class BookServiceTest {
 		bookServiceUnderTest.deleteBookById(id);
 	    verify(repo, timeout(1)).deleteById(id);
 	 }
+	  
+	 
 	
 	 
 	 @Test
-	 @Disabled
 	 public void deleteBookById_BookNotFound() {
 		 long id = 1L;
 		 when(repo.findById(id)).thenReturn(Optional.empty());
@@ -97,6 +97,8 @@ public class BookServiceTest {
 		 verify(repo, never()).deleteById(id);
 	 }
 	 
+	 
+
 	 
 
 	 @Test
